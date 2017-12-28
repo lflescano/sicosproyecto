@@ -18,7 +18,12 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        ItemModel::all();
+        $items;
+        if($request->only('nombre')){
+            $items = ItemModel::where('nombre','like','%'.$request->only('nombre')['nombre'].'%')->get();
+        }else{
+            $items = ItemModel::where('borrado',self::NO_BORRADO)->get();
+        }
 
         return View::make('items.index')
                    ->with('itemsToList',$items);
@@ -59,9 +64,12 @@ class ItemController extends Controller
      */
     public function show($id)
     {
+        \DB::listen(function ($query){
+            var_dump('<pre>');
+            var_dump($query);
+            var_dump('</pre>');
+        });
         $item = ItemModel::find($id);
-
-        dd($item->categoria);
         
         return View::make('items.show')
                    ->with('item',$item)

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ItemModel extends Model
 {
-    protected $table = 'category';
+    protected $table = 'item';
 
 	/**
      * The attributes that are mass assignable.
@@ -23,6 +23,6 @@ class ItemModel extends Model
 
     public function category()
     {
-        return $this->hasOne('App\Category','categoria_item', 'id');
+        return $this->hasOne('App\Category','id', 'categoria_item');
     }
 }
