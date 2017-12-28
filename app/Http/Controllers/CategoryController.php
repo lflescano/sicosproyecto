@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
-use App\ItemModel;
-use App\Alumno;
 use View;
 
-class ItemController extends Controller
+class CategoryController extends Controller
 {
     const NO_BORRADO = 0;
     const BORRADO = 1;
@@ -18,7 +17,7 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        ItemModel::all();
+        Category::where('borrado',self::NO_BORRADO)->get();
 
         return View::make('items.index')
                    ->with('itemsToList',$items);
@@ -42,9 +41,9 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        $itemCreado = ItemModel::create([
+        $itemCreado = Category::create([
             'nombre'=>$request->only('nombre')['nombre'],
-            'codigo' => $request->only('codigo')['codigo']
+            'habilitado' => self::NO_BORRADO
             ]);
 
         return View::make('items.show')

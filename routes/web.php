@@ -22,3 +22,5 @@ Route::get('/prueba', function () {
 Route::resource('alumno', 'AlumnoController');
 
 Route::resource('items', 'ItemController');
+
+Route::resource('category', 'CategoryController');
