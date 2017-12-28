@@ -64,16 +64,11 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        \DB::listen(function ($query){
-            var_dump('<pre>');
-            var_dump($query);
-            var_dump('</pre>');
-        });
         $item = ItemModel::find($id);
-        
+        dd($item->category);
         return View::make('items.show')
                    ->with('item',$item)
-                   ->with('categoria',$item->categoria);
+                   ->with('categoria',$item->category);
     }
 
     /**

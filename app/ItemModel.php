@@ -23,6 +23,6 @@ class ItemModel extends Model
 
     public function category()
     {
-        return $this->hasOne('App\Category','id', 'categoria_item');
+        return $this->hasOne('App\Category','categoria_item', 'id');
     }
 }
